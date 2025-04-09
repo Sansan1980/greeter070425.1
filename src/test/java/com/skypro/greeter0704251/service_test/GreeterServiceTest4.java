@@ -25,7 +25,7 @@ public class GreeterServiceTest4 {
 
     @BeforeEach
     void configureMock() {
-        Mockito.doReturn("Privet").when(helloService).randomHello();
+        Mockito.doReturn("Privet, ").when(helloService).randomHello();
     }
 
 
@@ -41,14 +41,14 @@ public class GreeterServiceTest4 {
         //здесь Явно поменяли поведение мока на "Hello",
         // но изоляция сохраняется, благодаря @BeforEach
         // происходит сбрасывание мока перед каждым @Test.
-        when(helloService.randomHello()).thenReturn("Hello");
+        when(helloService.randomHello()).thenReturn("Hello, ");
         String result = greeterService.greeter(" ");
-        Assertions.assertEquals("Hello, Anonimus",result);
+        Assertions.assertEquals("Hello, Anonimous",result);
     }
     @Test
     @DisplayName("Негативный сценарий метода greet whenNameNull")
     public void whenNameNull() {
         String result = greeterService.greeter(null);
-        Assertions.assertEquals("Privet, Anonimus",result);
+        Assertions.assertEquals("Privet, Anonimous",result);
     }
 }
